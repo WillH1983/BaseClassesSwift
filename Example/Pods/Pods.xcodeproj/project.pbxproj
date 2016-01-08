@@ -62,6 +62,7 @@
 		B52E7382351633CEFF752031E3E03E71 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E390EF0BAE109E63ABD92048F056F8B8 /* AlamofireObjectMapper.framework */; };
 		B6D2DC3E3DA44CD382B9B425F40E11C1 /* Alamofire-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FC62FAC637A54386BD1B00D08146B99B /* Alamofire-dummy.m */; };
 		BB730E66DE77295536AA5915C4D0F48C /* KVNProgressConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 20E264F90545737985496090D0FE660B /* KVNProgressConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE4788791C3F6A3700CC9CBB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4788781C3F6A3700CC9CBB /* User.swift */; };
 		BE63624389C47DCBC004F028463F105A /* AlamofireObjectMapper-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DCE62DCFECC4C2E1C0C4E40825BC13A /* AlamofireObjectMapper-dummy.m */; };
 		BEB60060AC3660372BC06570C9E39010 /* BaseClassesSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 74561D15F446993284741CBCB660B792 /* BaseClassesSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C41211CCDDFF7CBBBD282E65B8D284BF /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F781C73B1BB7819F844F04EE7917A1 /* Operators.swift */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -223,6 +224,7 @@
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BAE210418F23BE768ED6BE477AB85AD6 /* Manager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Manager.swift; path = Source/Manager.swift; sourceTree = "<group>"; };
 		BCCA0B4CACAB5A55319648F1587D3BB7 /* BaseModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
+		BE4788781C3F6A3700CC9CBB /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BEF9D08E7DA199CA4BE99728F28A17D7 /* Pods-BaseClassesSwift_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BaseClassesSwift_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BF71B472701E73AF00ABF7FE484E0812 /* Pods-BaseClassesSwift_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BaseClassesSwift_Tests-resources.sh"; sourceTree = "<group>"; };
 		C160667A4BAB30B74DDE3667E27A38D7 /* Map.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Map.swift; path = ObjectMapper/Core/Map.swift; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 				6D5FB8D852C76E97955B86C1BB129926 /* BaseClassesResult.swift */,
 				D0B6D724CBA7F304E4D17173832272D5 /* BaseClassesService.swift */,
 				34928559FC1433924D02AD38864146A3 /* BaseClassesServiceClient.swift */,
+				BE4788781C3F6A3700CC9CBB /* User.swift */,
 			);
 			path = ServiceLayer;
 			sourceTree = "<group>";
@@ -878,6 +881,7 @@
 				7FB8B34EB7CB5E4479250DF5E2093A6D /* BaseTableViewController.swift in Sources */,
 				80CC5D5C2DBF74F29FA5ECB8B96391D8 /* BaseViewController.swift in Sources */,
 				1565E5DA919C2E692D029EA7A205A71B /* BaseModel.swift in Sources */,
+				BE4788791C3F6A3700CC9CBB /* User.swift in Sources */,
 				015F16471FCC04E5D6FA224E0C9A43B2 /* BaseClassesResult.swift in Sources */,
 				123AC6454A3C5251376BB0C6F6DFA9E8 /* BaseClassesService.swift in Sources */,
 				52314ADCE768E643C18BDE65599E8E81 /* BaseClassesServiceClient.swift in Sources */,
