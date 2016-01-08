@@ -9,7 +9,7 @@
 import UIKit
 import KVNProgress
 
-class REPlenishBaseViewController: UIViewController {
+class BaseViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)

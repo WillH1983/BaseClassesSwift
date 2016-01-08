@@ -40,8 +40,8 @@
 		701966556846265A6519E8FE402FFA20 /* UIImage+KVNEmpty.h in Headers */ = {isa = PBXBuildFile; fileRef = 0ED08D76D822BD2E1EB3D0133E6FF13B /* UIImage+KVNEmpty.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		708E764987B746784CBD938EB8BF2B2F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0E4CC16C8196AE5921DBA8F96AA4F7 /* Foundation.framework */; };
 		70C8AAB8BC5BDF675466F3EA13FDAD25 /* UIColor+KVNContrast.h in Headers */ = {isa = PBXBuildFile; fileRef = F66C333938609495D3840D518F98BE2D /* UIColor+KVNContrast.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7FB8B34EB7CB5E4479250DF5E2093A6D /* REPlenishBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2963772E7F1F792B72DC145ECB0B1 /* REPlenishBaseTableViewController.swift */; };
-		80CC5D5C2DBF74F29FA5ECB8B96391D8 /* REPlenishBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DA8C3E04A511BDB20BCAC66AF1F9E5 /* REPlenishBaseViewController.swift */; };
+		7FB8B34EB7CB5E4479250DF5E2093A6D /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B2963772E7F1F792B72DC145ECB0B1 /* BaseTableViewController.swift */; };
+		80CC5D5C2DBF74F29FA5ECB8B96391D8 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09DA8C3E04A511BDB20BCAC66AF1F9E5 /* BaseViewController.swift */; };
 		80F496237530D382A045A29654D8C11C /* ServerTrustPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C0B5684990BF1B076EA4F2E3FB38BC /* ServerTrustPolicy.swift */; };
 		82971968CBDAB224212EEB4607C9FB8D /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9092838622EF67DE25E1225F896DD0 /* Result.swift */; };
 		8399DBEE3E2D98EB1F466132E476F4D9 /* MultipartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7C429D39575675D6F263A1C8824580 /* MultipartFormData.swift */; };
@@ -154,9 +154,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		04B2963772E7F1F792B72DC145ECB0B1 /* REPlenishBaseTableViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = REPlenishBaseTableViewController.swift; sourceTree = "<group>"; };
+		04B2963772E7F1F792B72DC145ECB0B1 /* BaseTableViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		07E228D8F7BA1B7602655D34A43C4E6C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		09DA8C3E04A511BDB20BCAC66AF1F9E5 /* REPlenishBaseViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = REPlenishBaseViewController.swift; sourceTree = "<group>"; };
+		09DA8C3E04A511BDB20BCAC66AF1F9E5 /* BaseViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		0B5749BCCAB6298D8FE9E207084946DF /* AlamofireObjectMapper-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AlamofireObjectMapper-prefix.pch"; sourceTree = "<group>"; };
 		0E6C5211C444F562DE1BB8E2E23F66FB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0ED08D76D822BD2E1EB3D0133E6FF13B /* UIImage+KVNEmpty.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+KVNEmpty.h"; path = "KVNProgress/Categories/UIImage+KVNEmpty.h"; sourceTree = "<group>"; };
@@ -394,8 +394,8 @@
 		59526FFB4D10D9FCCEC4BF3403C4CE8C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				04B2963772E7F1F792B72DC145ECB0B1 /* REPlenishBaseTableViewController.swift */,
-				09DA8C3E04A511BDB20BCAC66AF1F9E5 /* REPlenishBaseViewController.swift */,
+				04B2963772E7F1F792B72DC145ECB0B1 /* BaseTableViewController.swift */,
+				09DA8C3E04A511BDB20BCAC66AF1F9E5 /* BaseViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -875,8 +875,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				11F3E69C0EC4366363862E2D58BD00BE /* BaseClassesSwift-dummy.m in Sources */,
-				7FB8B34EB7CB5E4479250DF5E2093A6D /* REPlenishBaseTableViewController.swift in Sources */,
-				80CC5D5C2DBF74F29FA5ECB8B96391D8 /* REPlenishBaseViewController.swift in Sources */,
+				7FB8B34EB7CB5E4479250DF5E2093A6D /* BaseTableViewController.swift in Sources */,
+				80CC5D5C2DBF74F29FA5ECB8B96391D8 /* BaseViewController.swift in Sources */,
 				1565E5DA919C2E692D029EA7A205A71B /* ScrubTechBaseModel.swift in Sources */,
 				015F16471FCC04E5D6FA224E0C9A43B2 /* ScrubTechResult.swift in Sources */,
 				123AC6454A3C5251376BB0C6F6DFA9E8 /* ScrubTechService.swift in Sources */,
