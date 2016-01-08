@@ -16,8 +16,8 @@ public class AuthenticationService: BaseClassesService {
         
     }
     
-    public func registerUser(userObject:User, withSuccessBlock:(RegisterUser -> Void), andError:(NSError -> Void)) -> Void {
-        BaseClassesServiceClient().postObject(userObject, andService: self, successBlock: { (object:RegisterUser) -> Void in
+    public func registerUser(userObject:RegisterUser, withSuccessBlock:(User -> Void), andError:(NSError -> Void)) -> Void {
+        BaseClassesServiceClient().postObject(userObject, andService: self, successBlock: { (object:User) -> Void in
             withSuccessBlock(object)
         }) { (error) -> Void in
             andError(error)
