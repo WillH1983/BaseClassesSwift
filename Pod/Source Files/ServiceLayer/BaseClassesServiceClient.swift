@@ -11,7 +11,7 @@ import AlamofireObjectMapper
 import ObjectMapper
 import Alamofire
 
-class BaseClassesServiceClient: NSObject {
+public class BaseClassesServiceClient: NSObject {
     private var errorDomain = "ScrubTech.ErrorDomain"
     func postObject<Service:BaseClassesService, PostObject:BaseModel, ResponseObject:BaseModel>(object:PostObject, andService:Service, successBlock:(ResponseObject -> Void), errorBlock:(NSError -> Void)) {
         let JSONString = Mapper().toJSON(object)
