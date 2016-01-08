@@ -28,7 +28,7 @@ public class User: BaseModel {
         }
     }
     
-    override init() {
+    override public init() {
         super.init()
     }
     
