@@ -17,19 +17,19 @@ public protocol BaseClassesService: URLStringConvertible {
 }
 
 extension BaseClassesService {
-    var baseURL:String {
+    public var baseURL:String {
         return "https://www.scrub-tech.com"
     }
     
-    var URLString:String {
+    public var URLString:String {
         return self.baseURL + self.serviceURL
     }
     
-    var rootRequestKeyPath:String {
+    public var rootRequestKeyPath:String {
         return "request"
     }
     
-    var rootKeyPath:String {
+    public var rootKeyPath:String {
         return "object"
     }
 }
