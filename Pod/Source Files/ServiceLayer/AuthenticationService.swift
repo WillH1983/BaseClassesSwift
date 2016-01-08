@@ -12,6 +12,9 @@ public class AuthenticationService: BaseClassesService {
     private var params = [String: String]()
     private var loggingIn = false
     
+    public init () {
+        
+    }
     
     public func registerUser(userObject:User, withSuccessBlock:(User -> Void), andError:(NSError -> Void)) -> Void {
         BaseClassesServiceClient().postObject(userObject, andService: self, successBlock: { (object:User) -> Void in
