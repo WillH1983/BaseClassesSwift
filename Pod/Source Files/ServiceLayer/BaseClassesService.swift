@@ -18,7 +18,7 @@ public protocol BaseClassesService: URLStringConvertible {
 
 extension BaseClassesService {
     public var baseURL:String {
-        return "https://www.scrub-tech.com"
+        return "https://api.parse.com"
     }
     
     public var URLString:String {
@@ -26,10 +26,10 @@ extension BaseClassesService {
     }
     
     public var rootRequestKeyPath:String {
-        return "request"
+        return ""
     }
     
     public var rootKeyPath:String {
-        return "object"
+        return ""
     }
 }
