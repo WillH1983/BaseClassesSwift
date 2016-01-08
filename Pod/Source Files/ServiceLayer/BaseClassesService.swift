@@ -12,7 +12,7 @@ import Alamofire
 public protocol BaseClassesService: URLStringConvertible {
     var serviceURL:String {get}
     var baseURL:String {get}
-    var rootRequestKeyPath:String {get}
+    var rootRequestKeyPath:String? {get}
     var rootKeyPath:String {get}
 }
 
@@ -25,8 +25,8 @@ extension BaseClassesService {
         return self.baseURL + self.serviceURL
     }
     
-    public var rootRequestKeyPath:String {
-        return ""
+    public var rootRequestKeyPath:String? {
+        return nil
     }
     
     public var rootKeyPath:String {

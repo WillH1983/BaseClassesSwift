@@ -14,9 +14,15 @@ import Alamofire
 public class BaseClassesServiceClient: NSObject {
     private var errorDomain = "ScrubTech.ErrorDomain"
     public func postObject<Service:BaseClassesService, PostObject:BaseModel, ResponseObject:BaseModel>(object:PostObject, andService:Service, successBlock:(ResponseObject -> Void), errorBlock:(NSError -> Void)) {
-        let JSONString = Mapper().toJSON(object)
-        let dictionary = [andService.rootRequestKeyPath:JSONString]
-        let request = Alamofire.request(.POST, andService, parameters: dictionary, encoding: .JSON, headers: self.authenticationHeaders())
+        let JSONDictionary = Mapper().toJSON(object)
+        var postDictionary = [String: AnyObject]()
+        if let rootRequestKeyPath = andService.rootRequestKeyPath {
+            postDictionary = [rootRequestKeyPath: JSONDictionary]
+        } else {
+            postDictionary = JSONDictionary
+        }
+        
+        let request = Alamofire.request(.POST, andService, parameters: postDictionary, encoding: .JSON, headers: self.authenticationHeaders())
         request.responseObject(andService.rootKeyPath) { (response: Response<ResponseObject, NSError>) -> Void in
             let mappedObject = response.result.value
             if mappedObject != nil {
