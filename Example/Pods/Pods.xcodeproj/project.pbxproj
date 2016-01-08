@@ -64,6 +64,7 @@
 		BB730E66DE77295536AA5915C4D0F48C /* KVNProgressConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 20E264F90545737985496090D0FE660B /* KVNProgressConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE4788791C3F6A3700CC9CBB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4788781C3F6A3700CC9CBB /* User.swift */; };
 		BE47887B1C3F6AA000CC9CBB /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE47887A1C3F6AA000CC9CBB /* AuthenticationService.swift */; };
+		BE47887D1C3F723100CC9CBB /* ServiceErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE47887C1C3F723100CC9CBB /* ServiceErrors.swift */; };
 		BE63624389C47DCBC004F028463F105A /* AlamofireObjectMapper-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DCE62DCFECC4C2E1C0C4E40825BC13A /* AlamofireObjectMapper-dummy.m */; };
 		BEB60060AC3660372BC06570C9E39010 /* BaseClassesSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 74561D15F446993284741CBCB660B792 /* BaseClassesSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C41211CCDDFF7CBBBD282E65B8D284BF /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F781C73B1BB7819F844F04EE7917A1 /* Operators.swift */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -227,6 +228,7 @@
 		BCCA0B4CACAB5A55319648F1587D3BB7 /* BaseModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
 		BE4788781C3F6A3700CC9CBB /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BE47887A1C3F6AA000CC9CBB /* AuthenticationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		BE47887C1C3F723100CC9CBB /* ServiceErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceErrors.swift; sourceTree = "<group>"; };
 		BEF9D08E7DA199CA4BE99728F28A17D7 /* Pods-BaseClassesSwift_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-BaseClassesSwift_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BF71B472701E73AF00ABF7FE484E0812 /* Pods-BaseClassesSwift_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-BaseClassesSwift_Tests-resources.sh"; sourceTree = "<group>"; };
 		C160667A4BAB30B74DDE3667E27A38D7 /* Map.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Map.swift; path = ObjectMapper/Core/Map.swift; sourceTree = "<group>"; };
@@ -433,6 +435,7 @@
 		819B4BDBA9A5AAFD19D65DE17B3E7ED6 /* ServiceLayer */ = {
 			isa = PBXGroup;
 			children = (
+				BE47887C1C3F723100CC9CBB /* ServiceErrors.swift */,
 				BE47887A1C3F6AA000CC9CBB /* AuthenticationService.swift */,
 				BCCA0B4CACAB5A55319648F1587D3BB7 /* BaseModel.swift */,
 				6D5FB8D852C76E97955B86C1BB129926 /* BaseClassesResult.swift */,
@@ -886,6 +889,7 @@
 				BE47887B1C3F6AA000CC9CBB /* AuthenticationService.swift in Sources */,
 				1565E5DA919C2E692D029EA7A205A71B /* BaseModel.swift in Sources */,
 				BE4788791C3F6A3700CC9CBB /* User.swift in Sources */,
+				BE47887D1C3F723100CC9CBB /* ServiceErrors.swift in Sources */,
 				015F16471FCC04E5D6FA224E0C9A43B2 /* BaseClassesResult.swift in Sources */,
 				123AC6454A3C5251376BB0C6F6DFA9E8 /* BaseClassesService.swift in Sources */,
 				52314ADCE768E643C18BDE65599E8E81 /* BaseClassesServiceClient.swift in Sources */,
