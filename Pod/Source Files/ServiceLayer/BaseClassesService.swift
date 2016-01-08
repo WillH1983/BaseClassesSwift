@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-protocol BaseClassesService: URLStringConvertible {
+public protocol BaseClassesService: URLStringConvertible {
     var serviceURL:String {get}
     var baseURL:String {get}
     var rootRequestKeyPath:String {get}
