@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import ObjectMapper
 
-public class User: NSObject {
+public class User: BaseModel {
     public var username = ""
     public var password = ""
     public var objectId = ""
@@ -61,5 +62,11 @@ public class User: NSObject {
         return user
     }
     
-    
+    public override func mapping(map: Map) {
+        objectId <- map["objectId"]
+        sessionToken <- map["sessionToken"]
+        username <- map["username"]
+        pointsPerWeek <- map["pointsPerWeek"]
+        password <- map["password"]
+    }
 }

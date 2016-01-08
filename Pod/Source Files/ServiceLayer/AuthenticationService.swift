@@ -14,6 +14,11 @@ public class AuthenticationService: BaseClassesService {
     
     
     public func registerUser(userObject:User, withSuccessBlock:(User -> Void), andError:(NSError -> Void)) -> Void {
+        BaseClassesServiceClient().postObject(userObject, andService: self, successBlock: { (object:User) -> Void in
+            withSuccessBlock(object)
+        }) { (error) -> Void in
+            andError(error)
+        }
 //        ServiceClient().postObject(userObject, andService: self, withSuccessBlock: { (result: RKMappingResult) -> Void in
 //            if let mappedUserObject = result.firstObject() as? User {
 //                withSuccessBlock(mappedUserObject)
