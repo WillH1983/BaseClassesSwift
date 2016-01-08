@@ -32,7 +32,7 @@ public class User: BaseModel {
         super.init()
     }
     
-    required init?(_ map: Map) {
+    required public init?(_ map: Map) {
         super.init(map)
     }
     
