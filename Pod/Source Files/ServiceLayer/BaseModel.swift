@@ -18,7 +18,7 @@ public enum ScrubTechServiceErrorCode {
     case GenericError
 }
 
-class ScrubTechBaseModel:NSObject, Mappable {
+class BaseModel:NSObject, Mappable {
     
     var id = 0
     
