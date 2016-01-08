@@ -16,7 +16,7 @@ public class BaseClassesServiceClient: NSObject {
     public func postObject<Service:BaseClassesService, PostObject:BaseModel, ResponseObject:BaseModel>(object:PostObject, andService:Service, successBlock:(ResponseObject -> Void), errorBlock:(NSError -> Void)) {
         let JSONString = Mapper().toJSON(object)
         let dictionary = [andService.rootRequestKeyPath:JSONString]
-        let request = Alamofire.request(.POST, andService, parameters: dictionary, encoding: .JSON, headers: nil)
+        let request = Alamofire.request(.POST, andService, parameters: dictionary, encoding: .JSON, headers: self.authenticationHeaders())
         request.responseObject(andService.rootKeyPath) { (response: Response<ResponseObject, NSError>) -> Void in
             let mappedObject = response.result.value
             if mappedObject != nil {
@@ -43,6 +43,27 @@ public class BaseClassesServiceClient: NSObject {
         
         
 
+    }
+    
+    private func authenticationHeaders() -> [String: String] {
+        var httpHeaders = [String: String]()
+        
+        let userSessionToken = User.persistentUserObject().sessionToken as String
+        httpHeaders["X-Parse-Session-Token"] = userSessionToken
+        
+        if let parseApplicationId = NSBundle.mainBundle().infoDictionary?["ParseApplicationId"] as? String {
+            httpHeaders["X-Parse-Application-Id"] = parseApplicationId
+        } else {
+            assertionFailure("Provide a Parse Application Id in the info PLIST file")
+        }
+        
+        if let parseRestAPIKey = NSBundle.mainBundle().infoDictionary?["ParseRestAPIKey"] as? String {
+            httpHeaders["X-Parse-REST-API-Key"] = parseRestAPIKey
+        } else {
+            assertionFailure("Provide a Parse Rest API key in the info PLIST file")
+        }
+        
+        return authenticationHeaders()
     }
     
     private func checkForErrorInObject(object:BaseModel) -> NSError? {
