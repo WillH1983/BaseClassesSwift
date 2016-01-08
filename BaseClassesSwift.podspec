@@ -22,18 +22,19 @@ Pod::Spec.new do |s|
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "Will Hindenburg" => "WillH1983@yahoo.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/BaseClassesSwift.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/WillH1983/BaseClassesSwift.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '8.0'
   s.requires_arc = true
 
-  s.source_files = 'Pod/Classes/**/*'
+  s.source_files = 'Pod/Source Files/**/*'
   s.resource_bundles = {
     'BaseClassesSwift' => ['Pod/Assets/*.png']
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'AlamofireObjectMapper', '~> 2.1'
+  s.dependency 'KVNProgress'
 end

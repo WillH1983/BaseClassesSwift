@@ -84,8 +84,16 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-BaseClassesSwift_Tests/Alamofire.framework"
+  install_framework "Pods-BaseClassesSwift_Tests/AlamofireObjectMapper.framework"
   install_framework "Pods-BaseClassesSwift_Tests/BaseClassesSwift.framework"
+  install_framework "Pods-BaseClassesSwift_Tests/KVNProgress.framework"
+  install_framework "Pods-BaseClassesSwift_Tests/ObjectMapper.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-BaseClassesSwift_Tests/Alamofire.framework"
+  install_framework "Pods-BaseClassesSwift_Tests/AlamofireObjectMapper.framework"
   install_framework "Pods-BaseClassesSwift_Tests/BaseClassesSwift.framework"
+  install_framework "Pods-BaseClassesSwift_Tests/KVNProgress.framework"
+  install_framework "Pods-BaseClassesSwift_Tests/ObjectMapper.framework"
 fi
