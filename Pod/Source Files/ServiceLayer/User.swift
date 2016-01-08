@@ -28,6 +28,14 @@ public class User: BaseModel {
         }
     }
     
+    override init() {
+        super.init()
+    }
+    
+    required init?(_ map: Map) {
+        super.init(map)
+    }
+    
     public class func persistentUserObject() -> User {
         if let userDictionary = NSUserDefaults.standardUserDefaults().objectForKey("userData") as? [String: AnyObject] {
             return self.userObjectFromDictionary(userDictionary)
