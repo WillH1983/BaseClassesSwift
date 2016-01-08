@@ -63,7 +63,7 @@ public class BaseClassesServiceClient: NSObject {
             assertionFailure("Provide a Parse Rest API key in the info PLIST file")
         }
         
-        return authenticationHeaders()
+        return httpHeaders
     }
     
     private func checkForErrorInObject(object:BaseModel) -> NSError? {
