@@ -1,0 +1,14 @@
+PODS:
+  - BaseClassesSwift (0.1.0)
+
+DEPENDENCIES:
+  - BaseClassesSwift (from `../`)
+
+EXTERNAL SOURCES:
+  BaseClassesSwift:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  BaseClassesSwift: 49383bad7a4956c7deb64934b655352b9a0a0a70
+
+COCOAPODS: 0.39.0
