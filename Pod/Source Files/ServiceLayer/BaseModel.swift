@@ -18,13 +18,13 @@ public enum ScrubTechServiceErrorCode {
     case GenericError
 }
 
-public class BaseModel:NSObject, Mappable {
+public class BaseModel: Mappable {
     
 
     public var objectId = ""
-    public var objectType = ""
+    public var objectType = "Pointer"
     
-    override init() {
+    init() {
         
     }
     
