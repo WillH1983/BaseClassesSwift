@@ -23,10 +23,8 @@ extension BaseClassesService {
     }
     
     public var URLString:String {
-        var urlString = String()
-        if self.requestQueryParameters == nil {
-            urlString = self.baseURL + self.serviceURL
-        } else {
+        var urlString = self.baseURL + self.serviceURL
+        if self.requestQueryParameters != nil {
             var queryString = "?"
             for (key, value) in self.requestQueryParameters! {
                 queryString = queryString + key + "=" + value + "&"
