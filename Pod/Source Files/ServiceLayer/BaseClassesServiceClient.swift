@@ -13,7 +13,7 @@ import Alamofire
 
 public class BaseClassesServiceClient: NSObject {
     private var errorDomain = "ScrubTech.ErrorDomain"
-    public func postObject<Service:BaseClassesService, PostObject:BaseModel, ResponseObject:BaseModel>(object:PostObject, andService:Service, successBlock:(ResponseObject -> Void), errorBlock:(NSError -> Void)) {
+    @objc public func postObject<Service:BaseClassesService, PostObject:BaseModel, ResponseObject:BaseModel>(object:PostObject, andService:Service, successBlock:(ResponseObject -> Void), errorBlock:(NSError -> Void)) {
         let JSONDictionary = Mapper().toJSON(object)
         var postDictionary = [String: AnyObject]()
         if let rootRequestKeyPath = andService.rootRequestKeyPath {
@@ -51,7 +51,7 @@ public class BaseClassesServiceClient: NSObject {
 
     }
     
-    public func get<Service:BaseClassesService, ResponseObject:BaseModel>(service:Service, successBlock:(ResponseObject -> Void), errorBlock:(NSError -> Void)) {
+    @objc public func get<Service:BaseClassesService, ResponseObject:BaseModel>(service:Service, successBlock:(ResponseObject -> Void), errorBlock:(NSError -> Void)) {
 
         let request = Alamofire.request(.GET, service, parameters: nil, encoding: .JSON, headers: self.authenticationHeaders())
         request.responseObject(service.rootKeyPath) { (response: Response<ResponseObject, NSError>) -> Void in
