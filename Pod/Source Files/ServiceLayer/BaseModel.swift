@@ -24,7 +24,7 @@ public class BaseModel: Mappable {
     public var objectId = ""
     public var objectType = "Pointer"
     
-    init() {
+    public init() {
         
     }
     
