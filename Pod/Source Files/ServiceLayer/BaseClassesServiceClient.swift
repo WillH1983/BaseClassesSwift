@@ -51,6 +51,37 @@ public class BaseClassesServiceClient: NSObject {
 
     }
     
+    public func get<Service:BaseClassesService, ResponseObject:BaseModel>(service:Service, successBlock:(ResponseObject -> Void), errorBlock:(NSError -> Void)) {
+
+        let request = Alamofire.request(.GET, service, parameters: nil, encoding: .JSON, headers: self.authenticationHeaders())
+        request.responseObject(service.rootKeyPath) { (response: Response<ResponseObject, NSError>) -> Void in
+            let mappedObject = response.result.value
+            if mappedObject != nil {
+                successBlock(mappedObject!)
+                
+            } else {
+                request.responseObject { (response: Response<ResponseObject, NSError>) -> Void in
+                    let mappedObject = response.result.value
+                    if mappedObject != nil {
+                        let error = self.checkForErrorInObject(response.result.value!)
+                        if error != nil {
+                            errorBlock(error!)
+                            return
+                        } else {
+                            successBlock(mappedObject!)
+                        }
+                    } else {
+                        errorBlock(NSError(domain: self.errorDomain, code: -1, userInfo: [NSLocalizedDescriptionKey: "An error has occured, please try again later"]))
+                    }
+                }
+            }
+            
+        }
+        
+        
+        
+    }
+    
     private func authenticationHeaders() -> [String: String] {
         var httpHeaders = [String: String]()
         

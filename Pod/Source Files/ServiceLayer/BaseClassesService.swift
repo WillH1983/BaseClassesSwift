@@ -14,6 +14,7 @@ public protocol BaseClassesService: URLStringConvertible {
     var baseURL:String {get}
     var rootRequestKeyPath:String? {get}
     var rootKeyPath:String {get}
+    var requestQueryParameters:Dictionary<String, String>? {get}
 }
 
 extension BaseClassesService {
@@ -22,7 +23,18 @@ extension BaseClassesService {
     }
     
     public var URLString:String {
-        return self.baseURL + self.serviceURL
+        var urlString = String()
+        if self.requestQueryParameters == nil {
+            urlString = self.baseURL + self.serviceURL
+        } else {
+            var queryString = "?"
+            for (key, value) in self.requestQueryParameters! {
+                queryString = queryString + key + "=" + value + "&"
+            }
+            urlString = urlString + queryString
+            urlString = String(urlString.characters.dropLast())
+        }
+        return urlString
     }
     
     public var rootRequestKeyPath:String? {
@@ -31,5 +43,9 @@ extension BaseClassesService {
     
     public var rootKeyPath:String {
         return ""
+    }
+    
+    public var requestQueryParameters:Dictionary<String, String>? {
+        return nil
     }
 }

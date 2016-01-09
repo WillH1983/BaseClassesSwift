@@ -23,19 +23,16 @@ public class AuthenticationService: BaseClassesService {
         }) { (error) -> Void in
             andError(error)
         }
-//        ServiceClient().postObject(userObject, andService: self, withSuccessBlock: { (result: RKMappingResult) -> Void in
-//            if let mappedUserObject = result.firstObject() as? User {
-//                withSuccessBlock(mappedUserObject)
-//            } else {
-//                andError(NSError(domain: "BaseClasses", code: 1, userInfo: nil))
-//            }
-//        }) { (errorObject) -> Void in
-//            andError(errorObject)
-//        }
     }
     
-    public func loginUser(userObject:User, withSuccessBlock:(User -> Void), andError:(NSError -> Void)) {
-//        self.params = ["username": userObject.username, "password": userObject.password]
+    public func loginUser(userObject:RegisterUser, withSuccessBlock:(User -> Void), andError:(NSError -> Void)) {
+        self.params = ["username": userObject.username, "password": userObject.password]
+        BaseClassesServiceClient().get(self, successBlock: { (object:User) -> Void in
+            object.username = userObject.username
+            withSuccessBlock(object)
+        }) { (error) -> Void in
+            andError(error)
+        }
 //        self.loggingIn = true
 //        ServiceClient().getForService(self, withSuccess: { (result) -> Void in
 //            if let mappedUserObject = result.firstObject() as? User {
@@ -56,11 +53,7 @@ public class AuthenticationService: BaseClassesService {
         }
     }
     
-    public func rootKeyPath() -> String? {
-        return nil
-    }
-    
-    public func parameters() -> [NSObject : AnyObject]? {
+    public var requestQueryParameters:Dictionary<String, String>? {
         return self.params
     }
     
