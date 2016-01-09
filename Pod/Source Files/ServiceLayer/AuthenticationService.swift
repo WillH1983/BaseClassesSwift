@@ -29,21 +29,10 @@ public class AuthenticationService: BaseClassesService {
         self.params = ["username": userObject.username, "password": userObject.password]
         self.loggingIn = true
         BaseClassesServiceClient().get(self, successBlock: { (object:User) -> Void in
-            object.username = userObject.username
             withSuccessBlock(object)
         }) { (error) -> Void in
             andError(error)
         }
-//        self.loggingIn = true
-//        ServiceClient().getForService(self, withSuccess: { (result) -> Void in
-//            if let mappedUserObject = result.firstObject() as? User {
-//                withSuccessBlock(mappedUserObject)
-//            } else {
-//                andError(NSError(domain: "BaseClasses", code: 1, userInfo: nil))
-//            }
-//        }) { (error) -> Void in
-//            andError(error)
-//        }
     }
     
     public var serviceURL:String {
@@ -57,21 +46,4 @@ public class AuthenticationService: BaseClassesService {
     public var requestQueryParameters:Dictionary<String, String>? {
         return self.params
     }
-    
-//    public func mappingProvider() -> RKObjectMapping {
-//        let mapping = RKObjectMapping(forClass: User.self)
-//        mapping.addAttributeMappingsFromDictionary(["objectId": "objectId"])
-//        mapping.addAttributeMappingsFromDictionary(["sessionToken": "sessionToken"])
-//        mapping.addAttributeMappingsFromDictionary(["username": "username"])
-//        mapping.addAttributeMappingsFromDictionary(["pointsPerWeek": "pointsPerWeek"])
-//        
-//        return mapping
-//    }
-//    
-//    public func serializedMappingProvider() -> RKObjectMapping {
-//        let serialMapping = RKObjectMapping(forClass: User.self)
-//        serialMapping.addAttributeMappingsFromDictionary(["username": "username"])
-//        serialMapping.addAttributeMappingsFromDictionary(["password": "password"])
-//        return serialMapping
-//    }
 }
