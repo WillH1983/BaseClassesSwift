@@ -38,3 +38,27 @@ public class BaseClassesDateTransform: TransformType {
         return nil
     }
 }
+
+public class BaseClassesDecimalNumberTransform: TransformType {
+    public typealias Object = NSDecimalNumber
+    public typealias JSON = String
+    
+    public init() {}
+    
+    public func transformFromJSON(value: AnyObject?) -> NSDecimalNumber? {
+        if let stringValue = value as? String {
+            let number = NSDecimalNumber(string: stringValue)
+            return number
+        }
+        return nil
+    }
+    
+    public func transformToJSON(value: NSDecimalNumber?) -> String? {
+        if let numberValue = value {
+            let formatter = NSNumberFormatter()
+            let stringValue = formatter.stringFromNumber(numberValue)
+            return stringValue
+        }
+        return nil
+    }
+}
