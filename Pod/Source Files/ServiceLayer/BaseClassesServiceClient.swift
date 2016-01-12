@@ -41,7 +41,12 @@ public class BaseClassesServiceClient: NSObject {
                             successBlock(mappedObject!)
                         }
                     } else {
-                        errorBlock(NSError(domain: self.errorDomain, code: -1, userInfo: [NSLocalizedDescriptionKey: "An error has occured, please try again later"]))
+                        if response.result.isSuccess {
+                            successBlock(mappedObject!)
+                        } else {
+                           errorBlock(NSError(domain: self.errorDomain, code: -1, userInfo: [NSLocalizedDescriptionKey: "An error has occured, please try again later"]))
+                        }
+                        
                     }
                 }
             }
