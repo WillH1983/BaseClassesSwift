@@ -10,6 +10,7 @@ import Foundation
 
 public class AuthenticationService: BaseClassesService {
     var registeringUser = false
+    var refreshingToken = false
     
     public init () {
         
@@ -40,12 +41,21 @@ public class AuthenticationService: BaseClassesService {
         }
     }
     
+    public func refreshUser(userObject:RegisterUser, withSuccessBlock:(User -> Void), andError:(NSError -> Void)) {
+        
+    }
+    
     public var serviceURL:String {
-        if self.registeringUser {
-            return "/register"
+        if refreshingToken {
+            if self.registeringUser {
+                return "/register"
+            } else {
+                return "/login"
+            }
         } else {
-            return "/login"
+            return "/refresh"
         }
+        
         
     }
 
