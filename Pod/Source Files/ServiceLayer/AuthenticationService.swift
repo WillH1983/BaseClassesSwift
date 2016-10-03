@@ -41,8 +41,13 @@ public class AuthenticationService: BaseClassesService {
         }
     }
     
-    public func refreshUser(userObject:RegisterUser, withSuccessBlock:(User -> Void), andError:(NSError -> Void)) {
-        
+    public func refreshUser(userObject:RefreshUser, withSuccessBlock:(User -> Void), andError:(NSError -> Void)) {
+        BaseClassesServiceClient().postObject(userObject, andService: self, successBlock: { (object:User) -> Void in
+            object.username = userObject.username
+            withSuccessBlock(object)
+        }) { (error) -> Void in
+            andError(error)
+        }
     }
     
     public var serviceURL:String {
