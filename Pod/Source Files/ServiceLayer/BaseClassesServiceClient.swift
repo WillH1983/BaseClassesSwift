@@ -11,9 +11,9 @@ import AlamofireObjectMapper
 import ObjectMapper
 import Alamofire
 
-public class BaseClassesServiceClient: NSObject {
-    private var errorDomain = "ScrubTech.ErrorDomain"
-    public func postObject<Service:BaseClassesService, PostObject:BaseModel, ResponseObject:BaseModel>(object:PostObject, andService:Service, successBlock:(ResponseObject -> Void), errorBlock:(NSError -> Void)) {
+open class BaseClassesServiceClient: NSObject {
+    fileprivate var errorDomain = "ScrubTech.ErrorDomain"
+    open func postObject<Service:BaseClassesService, PostObject:BaseModel, ResponseObject:BaseModel>(_ object:PostObject, andService:Service, successBlock:@escaping ((ResponseObject) -> Void), errorBlock:@escaping ((NSError) -> Void)) {
         let JSONDictionary = Mapper().toJSON(object)
         var postDictionary = [String: AnyObject]()
         if let rootRequestKeyPath = andService.rootRequestKeyPath {
@@ -33,15 +33,11 @@ public class BaseClassesServiceClient: NSObject {
                 request.responseObject { (response: Response<ResponseObject, NSError>) -> Void in
                     let mappedObject = response.result.value
                     if mappedObject != nil {
-                        let error = self.checkForErrorInObject(response.result.value!)
-                        if error != nil {
-                            errorBlock(response.result.error!)
-                            return
-                        } else {
-                            successBlock(mappedObject!)
-                        }
+                        successBlock(mappedObject!)
                     } else {
-                        errorBlock(response.result.error!)
+                        self.handleErrorResponse(response.data, refreshCompletionBlock: { () in
+                            self.postObject(object, andService: andService, successBlock: successBlock, errorBlock: errorBlock)
+                        }, errorBlock: errorBlock)
                     }
                 }
             }
@@ -49,7 +45,7 @@ public class BaseClassesServiceClient: NSObject {
         }
     }
     
-    public func putObject<Service:BaseClassesService, PostObject:BaseModel, ResponseObject:BaseModel>(object:PostObject, andService:Service, successBlock:(ResponseObject -> Void), errorBlock:(NSError -> Void)) {
+    open func putObject<Service:BaseClassesService, PostObject:BaseModel, ResponseObject:BaseModel>(_ object:PostObject, andService:Service, successBlock:@escaping ((ResponseObject) -> Void), errorBlock:@escaping ((NSError) -> Void)) {
         let JSONDictionary = Mapper().toJSON(object)
         var postDictionary = [String: AnyObject]()
         if let rootRequestKeyPath = andService.rootRequestKeyPath {
@@ -69,15 +65,11 @@ public class BaseClassesServiceClient: NSObject {
                 request.responseObject { (response: Response<ResponseObject, NSError>) -> Void in
                     let mappedObject = response.result.value
                     if mappedObject != nil {
-                        let error = self.checkForErrorInObject(response.result.value!)
-                        if error != nil {
-                            errorBlock(error!)
-                            return
-                        } else {
-                            successBlock(mappedObject!)
-                        }
+                        successBlock(mappedObject!)
                     } else {
-                        errorBlock(NSError(domain: self.errorDomain, code: -1, userInfo: [NSLocalizedDescriptionKey: "An error has occured, please try again later"]))
+                        self.handleErrorResponse(response.data, refreshCompletionBlock: { () in
+                            self.putObject(object, andService: andService, successBlock: successBlock, errorBlock: errorBlock)
+                        }, errorBlock: errorBlock)
                     }
                 }
             }
@@ -85,7 +77,7 @@ public class BaseClassesServiceClient: NSObject {
         }
     }
     
-    public func getObject<Service:BaseClassesService, ResponseObject:BaseModel>(service:Service, successBlock:(ResponseObject -> Void), errorBlock:(NSError -> Void)) {
+    open func getObject<Service:BaseClassesService, ResponseObject:BaseModel>(_ service:Service, successBlock:@escaping ((ResponseObject) -> Void), errorBlock:@escaping ((NSError) -> Void)) {
 
         let request = Alamofire.request(.GET, service, parameters: nil, encoding: .JSON, headers: self.authenticationHeaders())
         request.validate()
@@ -93,27 +85,22 @@ public class BaseClassesServiceClient: NSObject {
                 let mappedObject = response.result.value
                 if mappedObject != nil {
                     successBlock(mappedObject!)
-                    
                 } else {
                     request.responseObject { (response: Response<ResponseObject, NSError>) -> Void in
                         let mappedObject = response.result.value
                         if mappedObject != nil {
-                            let error = self.checkForErrorInObject(response.result.value!)
-                            if error != nil {
-                                errorBlock(error!)
-                                return
-                            } else {
-                                successBlock(mappedObject!)
-                            }
+                            successBlock(mappedObject!)
                         } else {
-                            errorBlock(NSError(domain: self.errorDomain, code: -1, userInfo: [NSLocalizedDescriptionKey: "An error has occured, please try again later"]))
+                            self.handleErrorResponse(response.data, refreshCompletionBlock: { () in
+                                self.getObject(service, successBlock: successBlock, errorBlock: errorBlock)
+                            }, errorBlock: errorBlock)
                         }
                     }
                 }
         }
     }
     
-    public func getObjects<Service:BaseClassesService, ResponseObject:BaseModel>(service:Service, successBlock:([ResponseObject] -> Void), errorBlock:(NSError -> Void)) {
+    open func getObjects<Service:BaseClassesService, ResponseObject:BaseModel>(_ service:Service, successBlock:@escaping (([ResponseObject]) -> Void), errorBlock:@escaping ((NSError) -> Void)) {
         
         let request = Alamofire.request(.GET, service, parameters: nil, encoding: .JSON, headers: self.authenticationHeaders())
         request.validate()
@@ -131,33 +118,39 @@ public class BaseClassesServiceClient: NSObject {
                     if mappedObject != nil {
                         successBlock(mappedObject!)
                     } else {
-                        if self.sessionRefreshRequired(response.data) {
-                            let user = User.persistentUserObject()
-                            let refreshObject = RefreshUser()
-                            refreshObject.refreshToken = user.refreshToken
-                            AuthenticationService().refreshUser(refreshObject, withSuccessBlock: { (user) in
-                                user.save()
-                                self.getObjects(service, successBlock: successBlock, errorBlock: errorBlock)
-                            }, andError: { (error) in
-                                errorBlock(NSError(domain: self.errorDomain, code: -1, userInfo: [NSLocalizedDescriptionKey: "An error has occured, please try again later"]))
-                            })
-                        } else {
-                           errorBlock(NSError(domain: self.errorDomain, code: -1, userInfo: [NSLocalizedDescriptionKey: "An error has occured, please try again later"]))
-                        }
-                        errorBlock(NSError(domain: self.errorDomain, code: -1, userInfo: [NSLocalizedDescriptionKey: "An error has occured, please try again later"]))
+                        self.handleErrorResponse(response.data, refreshCompletionBlock: { () in
+                            self.getObjects(service, successBlock: successBlock, errorBlock: errorBlock)
+                        }, errorBlock: errorBlock)
+                        
                     }
                 }
             }
         }
     }
     
-    private func authenticationHeaders() -> [String: String] {
+    fileprivate func handleErrorResponse(_ responseData:Data?, refreshCompletionBlock:@escaping ((Void) -> Void), errorBlock:@escaping ((NSError) -> Void)) {
+        if self.sessionRefreshRequired(responseData) {
+            let user = User.persistentUserObject()
+            let refreshObject = RefreshUser()
+            refreshObject.refreshToken = user.refreshToken
+            AuthenticationService().refreshUser(refreshObject, withSuccessBlock: { (user) in
+                user.save()
+                refreshCompletionBlock()
+            }, andError: { (error) in
+                    errorBlock(NSError(domain: self.errorDomain, code: -1, userInfo: [NSLocalizedDescriptionKey: "An error has occured, please try again later"]))
+            })
+        } else {
+            errorBlock(NSError(domain: self.errorDomain, code: -1, userInfo: [NSLocalizedDescriptionKey: "An error has occured, please try again later"]))
+        }
+    }
+    
+    fileprivate func authenticationHeaders() -> [String: String] {
         var httpHeaders = [String: String]()
         
         let userSessionToken = User.persistentUserObject().idToken as String
         httpHeaders["Authorization"] = userSessionToken
         
-        if let AWSAPIKey = NSBundle.mainBundle().infoDictionary?["AWSAPIKey"] as? String {
+        if let AWSAPIKey = Bundle.main.infoDictionary?["AWSAPIKey"] as? String {
             httpHeaders["x-api-key"] = AWSAPIKey
         } else {
             assertionFailure("Provide a AWS API Key in the info PLIST file")
@@ -166,13 +159,13 @@ public class BaseClassesServiceClient: NSObject {
         return httpHeaders
     }
     
-    private func checkForErrorInObject(object:BaseModel) -> NSError? {
+    fileprivate func checkForErrorInObject(_ object:BaseModel) -> NSError? {
         return NSError(domain: errorDomain, code: -1, userInfo: [NSLocalizedDescriptionKey: "Something went wrong, please try again"])
     }
     
-    private func sessionRefreshRequired(data:NSData?) -> Bool {
+    fileprivate func sessionRefreshRequired(_ data:Data?) -> Bool {
         if let updatedData = data {
-            if let object = try? NSJSONSerialization.JSONObjectWithData(updatedData, options: []) {
+            if let object = try? JSONSerialization.jsonObject(with: updatedData, options: []) {
                 print(object)
                 if let dictionary = object as? Dictionary<String, String> {
                     if let errorMessage = dictionary["message"] {

@@ -9,8 +9,8 @@
 import UIKit
 import ObjectMapper
 
-public class RefreshUser: BaseModel {
-    public var refreshToken = ""
+open class RefreshUser: BaseModel {
+    open var refreshToken = ""
     
     override public init() {
         super.init()
@@ -20,7 +20,7 @@ public class RefreshUser: BaseModel {
         super.init(map)
     }
     
-    public override func mapping(map: Map) {
+    open override func mapping(_ map: Map) {
         refreshToken <- map["RefreshToken"]
     }
 }
