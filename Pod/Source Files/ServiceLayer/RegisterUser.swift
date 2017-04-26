@@ -24,11 +24,11 @@ open class RegisterUser: BaseModel {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
-    open override func mapping(_ map: Map) {
+    open override func mapping(map: Map) {
         username <- map["username"]
         password <- map["password"]
         email <- map["email"]

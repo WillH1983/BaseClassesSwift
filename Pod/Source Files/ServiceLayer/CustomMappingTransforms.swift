@@ -15,7 +15,7 @@ open class BaseClassesDateTransform: TransformType {
     
     public init() {}
     
-    open func transformFromJSON(_ value: AnyObject?) -> Date? {
+    open func transformFromJSON(_ value: Any?) -> Date? {
         if let timeInt = value as? Double {
             return Date(timeIntervalSince1970: TimeInterval(timeInt))
         }
@@ -49,7 +49,7 @@ open class BaseClassesDecimalNumberTransform: TransformType {
     
     public init() {}
     
-    open func transformFromJSON(_ value: AnyObject?) -> NSDecimalNumber? {
+    open func transformFromJSON(_ value: Any?) -> NSDecimalNumber? {
         if let stringValue = value as? String {
             let number = NSDecimalNumber(string: stringValue)
             return number

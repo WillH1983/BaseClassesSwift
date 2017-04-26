@@ -29,11 +29,11 @@ open class BaseModel:NSObject, Mappable {
     }
     
     
-    required public init?(_ map: Map) {
+    required public init?(map: Map) {
         
     }
     
-    open func mapping(_ map: Map) {
+    open func mapping(map: Map) {
         objectType <- map["__type"]
         objectId <- map["objectId"]
     }

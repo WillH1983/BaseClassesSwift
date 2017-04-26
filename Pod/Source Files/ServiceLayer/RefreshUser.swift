@@ -16,11 +16,11 @@ open class RefreshUser: BaseModel {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
-    open override func mapping(_ map: Map) {
+    open override func mapping(map: Map) {
         refreshToken <- map["RefreshToken"]
     }
 }

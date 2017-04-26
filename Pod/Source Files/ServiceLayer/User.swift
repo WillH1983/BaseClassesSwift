@@ -20,8 +20,8 @@ open class User: BaseModel {
         super.init()
     }
     
-    required public init?(_ map: Map) {
-        super.init(map)
+    required public init?(map: Map) {
+        super.init(map: map)
     }
     
     open class func persistentUserObject() -> User {
@@ -59,8 +59,8 @@ open class User: BaseModel {
         return user
     }
     
-    open override func mapping(_ map: Map) {
-        super.mapping(map)
+    open override func mapping(map: Map) {
+        super.mapping(map: map)
         refreshToken <- map["RefreshToken"]
         username <- map["username"]
         pointsPerWeek <- map["pointsPerWeek"]

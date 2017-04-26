@@ -15,22 +15,22 @@ open class BaseClassesServiceClient: NSObject {
     fileprivate var errorDomain = "ScrubTech.ErrorDomain"
     open func postObject<Service:BaseClassesService, PostObject:BaseModel, ResponseObject:BaseModel>(_ object:PostObject, andService:Service, successBlock:@escaping ((ResponseObject) -> Void), errorBlock:@escaping ((NSError) -> Void)) {
         let JSONDictionary = Mapper().toJSON(object)
-        var postDictionary = [String: AnyObject]()
+        var postDictionary = Parameters()
         if let rootRequestKeyPath = andService.rootRequestKeyPath {
             postDictionary = [rootRequestKeyPath: JSONDictionary]
         } else {
             postDictionary = JSONDictionary
         }
-        
-        let request = Alamofire.request(.POST, andService, parameters: postDictionary, encoding: .JSON, headers: self.authenticationHeaders())
+        let request = Alamofire.request(andService, method: HTTPMethod.post, parameters: postDictionary, encoding: JSONEncoding.default, headers: self.authenticationHeaders())
         request.validate()
-        request.responseObject(andService.rootKeyPath) { (response: Response<ResponseObject, NSError>) -> Void in
+
+        request.responseObject(queue: nil, keyPath: andService.rootKeyPath) { (response: DataResponse<ResponseObject>) -> Void in
             let mappedObject = response.result.value
             if mappedObject != nil {
                 successBlock(mappedObject!)
                 
             } else {
-                request.responseObject { (response: Response<ResponseObject, NSError>) -> Void in
+                request.responseObject { (response: DataResponse<ResponseObject>) -> Void in
                     let mappedObject = response.result.value
                     if mappedObject != nil {
                         successBlock(mappedObject!)
@@ -47,22 +47,22 @@ open class BaseClassesServiceClient: NSObject {
     
     open func putObject<Service:BaseClassesService, PostObject:BaseModel, ResponseObject:BaseModel>(_ object:PostObject, andService:Service, successBlock:@escaping ((ResponseObject) -> Void), errorBlock:@escaping ((NSError) -> Void)) {
         let JSONDictionary = Mapper().toJSON(object)
-        var postDictionary = [String: AnyObject]()
+        var postDictionary = [String: Any]()
         if let rootRequestKeyPath = andService.rootRequestKeyPath {
             postDictionary = [rootRequestKeyPath: JSONDictionary]
         } else {
             postDictionary = JSONDictionary
         }
         
-        let request = Alamofire.request(.PUT, andService, parameters: postDictionary, encoding: .JSON, headers: self.authenticationHeaders())
+        let request = Alamofire.request(andService, method: HTTPMethod.put, parameters: postDictionary, encoding: JSONEncoding.default, headers: self.authenticationHeaders())
         request.validate()
-        request.responseObject(andService.rootKeyPath) { (response: Response<ResponseObject, NSError>) -> Void in
+        request.responseObject(queue: nil, keyPath: andService.rootKeyPath) { (response: DataResponse<ResponseObject>) -> Void in
             let mappedObject = response.result.value
             if mappedObject != nil {
                 successBlock(mappedObject!)
                 
             } else {
-                request.responseObject { (response: Response<ResponseObject, NSError>) -> Void in
+                request.responseObject { (response: DataResponse<ResponseObject>) -> Void in
                     let mappedObject = response.result.value
                     if mappedObject != nil {
                         successBlock(mappedObject!)
@@ -79,14 +79,14 @@ open class BaseClassesServiceClient: NSObject {
     
     open func getObject<Service:BaseClassesService, ResponseObject:BaseModel>(_ service:Service, successBlock:@escaping ((ResponseObject) -> Void), errorBlock:@escaping ((NSError) -> Void)) {
 
-        let request = Alamofire.request(.GET, service, parameters: nil, encoding: .JSON, headers: self.authenticationHeaders())
+        let request = Alamofire.request(service, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: self.authenticationHeaders())
         request.validate()
-        request.responseObject(service.rootKeyPath) { (response: Response<ResponseObject, NSError>) -> Void in
+        request.responseObject(queue: nil, keyPath: service.rootKeyPath) { (response: DataResponse<ResponseObject>) -> Void in
                 let mappedObject = response.result.value
                 if mappedObject != nil {
                     successBlock(mappedObject!)
                 } else {
-                    request.responseObject { (response: Response<ResponseObject, NSError>) -> Void in
+                    request.responseObject { (response: DataResponse<ResponseObject>) -> Void in
                         let mappedObject = response.result.value
                         if mappedObject != nil {
                             successBlock(mappedObject!)
@@ -102,18 +102,15 @@ open class BaseClassesServiceClient: NSObject {
     
     open func getObjects<Service:BaseClassesService, ResponseObject:BaseModel>(_ service:Service, successBlock:@escaping (([ResponseObject]) -> Void), errorBlock:@escaping ((NSError) -> Void)) {
         
-        let request = Alamofire.request(.GET, service, parameters: nil, encoding: .JSON, headers: self.authenticationHeaders())
+        let request = Alamofire.request(service, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: self.authenticationHeaders())
         request.validate()
-        request.responseArray(service.rootKeyPath) { (response: Response<[ResponseObject], NSError>) -> Void in
-            print(response.response)
-            print(response.result.error?.userInfo)
-            print (response.result.error?.localizedDescription)
+        request.responseArray(queue: nil, keyPath: service.rootKeyPath) { (response: DataResponse<[ResponseObject]>) -> Void in
             let mappedObject = response.result.value
             if mappedObject != nil {
                 successBlock(mappedObject!)
                 
             } else {
-                request.responseArray { (response: Response<[ResponseObject], NSError>) -> Void in
+                request.responseArray { (response: DataResponse<[ResponseObject]>) -> Void in
                     let mappedObject = response.result.value
                     if mappedObject != nil {
                         successBlock(mappedObject!)
